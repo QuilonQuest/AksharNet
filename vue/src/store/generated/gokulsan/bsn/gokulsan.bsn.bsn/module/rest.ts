@@ -9,6 +9,8 @@
  * ---------------------------------------------------------------
  */
 
+export type BsnMsgCreatePostResponse = object;
+
 /**
  * Params defines the parameters for the module.
  */

@@ -44692,6 +44692,8 @@ definitions:
     description: >-
       MsgCreateVestingAccountResponse defines the Msg/CreateVestingAccount
       response type.
+  gokulsan.bsn.bsn.MsgCreatePostResponse:
+    type: object
   gokulsan.bsn.bsn.Params:
     type: object
     description: Params defines the parameters for the module.
