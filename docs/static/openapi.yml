@@ -18782,6 +18782,35 @@ paths:
           format: int64
       tags:
         - Query
+  /gokulsan/bsn/bsn/bsn:
+    get:
+      summary: Queries a list of Bsn items.
+      operationId: GokulsanBsnBsnBsn
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /gokulsan/bsn/bsn/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -44697,6 +44726,8 @@ definitions:
   gokulsan.bsn.bsn.Params:
     type: object
     description: Params defines the parameters for the module.
+  gokulsan.bsn.bsn.QueryBsnResponse:
+    type: object
   gokulsan.bsn.bsn.QueryParamsResponse:
     type: object
     properties:

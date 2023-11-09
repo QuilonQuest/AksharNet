@@ -13,6 +13,10 @@ export interface QueryParamsResponse {
   params: Params | undefined;
 }
 
+export interface QueryBsnRequest {}
+
+export interface QueryBsnResponse {}
+
 const baseQueryParamsRequest: object = {};
 
 export const QueryParamsRequest = {
@@ -110,10 +114,88 @@ export const QueryParamsResponse = {
   },
 };
 
+const baseQueryBsnRequest: object = {};
+
+export const QueryBsnRequest = {
+  encode(_: QueryBsnRequest, writer: Writer = Writer.create()): Writer {
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): QueryBsnRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseQueryBsnRequest } as QueryBsnRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryBsnRequest {
+    const message = { ...baseQueryBsnRequest } as QueryBsnRequest;
+    return message;
+  },
+
+  toJSON(_: QueryBsnRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<QueryBsnRequest>): QueryBsnRequest {
+    const message = { ...baseQueryBsnRequest } as QueryBsnRequest;
+    return message;
+  },
+};
+
+const baseQueryBsnResponse: object = {};
+
+export const QueryBsnResponse = {
+  encode(_: QueryBsnResponse, writer: Writer = Writer.create()): Writer {
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): QueryBsnResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseQueryBsnResponse } as QueryBsnResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryBsnResponse {
+    const message = { ...baseQueryBsnResponse } as QueryBsnResponse;
+    return message;
+  },
+
+  toJSON(_: QueryBsnResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<QueryBsnResponse>): QueryBsnResponse {
+    const message = { ...baseQueryBsnResponse } as QueryBsnResponse;
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  /** Queries a list of Bsn items. */
+  Bsn(request: QueryBsnRequest): Promise<QueryBsnResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -125,6 +207,12 @@ export class QueryClientImpl implements Query {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("gokulsan.bsn.bsn.Query", "Params", data);
     return promise.then((data) => QueryParamsResponse.decode(new Reader(data)));
+  }
+
+  Bsn(request: QueryBsnRequest): Promise<QueryBsnResponse> {
+    const data = QueryBsnRequest.encode(request).finish();
+    const promise = this.rpc.request("gokulsan.bsn.bsn.Query", "Bsn", data);
+    return promise.then((data) => QueryBsnResponse.decode(new Reader(data)));
   }
 }
 

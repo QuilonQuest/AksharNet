@@ -16,6 +16,8 @@ export type BsnMsgCreatePostResponse = object;
  */
 export type BsnParams = object;
 
+export type BsnQueryBsnResponse = object;
+
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
  */
@@ -231,6 +233,22 @@ export class HttpClient<SecurityDataType = unknown> {
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryBsn
+   * @summary Queries a list of Bsn items.
+   * @request GET:/gokulsan/bsn/bsn/bsn
+   */
+  queryBsn = (params: RequestParams = {}) =>
+    this.request<BsnQueryBsnResponse, RpcStatus>({
+      path: `/gokulsan/bsn/bsn/bsn`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
   /**
    * No description
    *
